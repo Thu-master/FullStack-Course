@@ -1,0 +1,191 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  background-color: #f9faf9;
+  color: #000;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  padding: 1.5rem 1.5rem 0;
+}
+
+header h1 {
+  font-weight: 700;
+  font-size: 1rem;
+  margin: 0;
+}
+
+main {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  padding: 5rem 1rem 2rem;
+}
+
+form {
+  width: 100%;
+  max-width: 400px;
+}
+
+h2 {
+  text-align: center;
+  font-weight: 500;
+  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.input-group {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+label {
+  position: absolute;
+  top: -0.75rem;
+  left: 0.75rem;
+  background-color: #f9faf9;
+  color: #4f7aff;
+  font-size: 0.75rem;
+  padding: 0 0.25rem;
+  pointer-events: none;
+}
+
+input[type="email"] {
+  width: 100%;
+  padding: 0.75rem 1.25rem;
+  font-size: 0.875rem;
+  border: 1px solid #4f7aff;
+  border-radius: 9999px;
+  outline: none;
+  color: #000;
+}
+
+input[type="email"]:focus {
+  box-shadow: 0 0 0 2px #4f7aff;
+  border-color: #4f7aff;
+}
+
+button[type="submit"] {
+  width: 100%;
+  background-color: #111;
+  color: #fff;
+  border: none;
+  border-radius: 9999px;
+  padding: 0.75rem 0;
+  font-size: 0.875rem;
+  cursor: pointer;
+  margin-bottom: 1rem;
+}
+
+button[type="submit"]:hover {
+  background-color: #222;
+}
+
+.register-text {
+  text-align: center;
+  font-size: 0.875rem;
+  margin-bottom: 1.5rem;
+  color: #000;
+}
+
+.register-text a {
+  color: #4f7aff;
+  text-decoration: none;
+}
+
+.register-text a:hover {
+  text-decoration: underline;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  font-size: 0.75rem;
+  color: #c1c1c1;
+  margin-bottom: 1.5rem;
+}
+
+.divider span {
+  padding: 0 0.75rem;
+  font-weight: 600;
+  color: #6b7280;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex-grow: 1;
+  height: 1px;
+  background-color: #e5e7eb;
+}
+
+.social-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.social-buttons button {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.25rem;
+  font-size: 0.875rem;
+  border-radius: 9999px;
+  border: 1px solid #d1d5db;
+  background-color: #fff;
+  cursor: pointer;
+  color: #000;
+  transition: background-color 0.2s ease;
+}
+
+.social-buttons button:hover {
+  background-color: #f3f4f6;
+}
+
+.social-buttons img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.social-buttons .phone i {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+footer {
+  text-align: center;
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+footer a {
+  color: #6b7280;
+  text-decoration: underline;
+  margin: 0 0.25rem;
+}
+
+footer a:hover {
+  color: #4f7aff;
+}
+
+@media (max-width: 480px) {
+  main {
+    padding: 3rem 1rem 2rem;
+  }
+}
