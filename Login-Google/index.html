@@ -1,10 +1,68 @@
-<!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login</title>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <title>Google Login</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Google+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body></body>
+  <body>
+    <div class="container">
+      <div class="left-section">
+        <img
+          alt="Google logo with G letter in blue, red, yellow and green colors"
+          class="logo"
+          src="https://storage.googleapis.com/a1aa/image/07447cc0-64f8-40a7-f8a7-5baf23c6e833.jpg"
+          width="24"
+          height="24"
+        />
+        <h1 class="title">Đăng nhập</h1>
+        <p class="description">
+          bằng Tài khoản Google của bạn. Bạn sẽ có thể truy cập vào các ứng dụng
+          khác của Google trong trình duyệt bằng tài khoản này.
+        </p>
+      </div>
+      <form autocomplete="off" novalidate>
+        <label for="email">Email hoặc số điện thoại</label>
+        <input
+          id="email"
+          name="email"
+          type="text"
+          aria-describedby="forgot-email"
+        />
+        <a class="forgot-link" href="#" id="forgot-email"
+          >Bạn quên địa chỉ email?</a
+        >
+        <p class="info-text">
+          Đây không phải máy tính của bạn? Hãy sử dụng Chế độ khách để đăng nhập
+          một cách riêng tư.
+          <strong class="info-strong"
+            >Tìm hiểu thêm về cách sử dụng Chế độ khách</strong
+          >
+        </p>
+        <div class="form-footer">
+          <a class="create-account" href="#">Tạo tài khoản</a>
+          <button class="next-button" type="submit">Tiếp theo</button>
+        </div>
+      </form>
+    </div>
+    <footer>
+      <div class="language-select">
+        <span>Tiếng Việt</span>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div class="footer-links">
+        <a href="#">Trợ giúp</a>
+        <a href="#">Quyền riêng tư</a>
+        <a href="#">Điều khoản</a>
+      </div>
+    </footer>
+  </body>
 </html>
