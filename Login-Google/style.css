@@ -156,7 +156,6 @@ footer {
   align-items: center;
   gap: 0.5rem; /* increased */
   cursor: pointer;
-  user-select: none;
   font-weight: 700;
 }
 .language-select i {
