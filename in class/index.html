@@ -1,18 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>HomeWork</title>
+    <style>
+      body {
+        background-color: antiquewhite;
+      }
+    </style>
   </head>
   <body>
-    <div class="container">
-      <input id="year" type="text" name="year" placeholder="Enter a year" />
-      <button id="btAdd">Add</button>
+    <h2>Giải phương trình bậc 1 và bậc 2</h2>
+
+    <label for="a">Hệ số a:</label>
+    <input type="number" id="a" />
+
+    <label for="b">Hệ số b:</label>
+    <input type="number" id="b" />
+
+    <label for="c">Hệ số c:</label>
+    <input type="number" id="c" />
+
+    <label for="type">Chọn loại phương trình:</label>
+    <select id="type">
+      <option value="1">Phương trình bậc 1 (ax + b = 0)</option>
+      <option value="2">Phương trình bậc 2 (ax² + bx + c = 0)</option>
+    </select>
+
+    <button type="button" onclick="giaiPhuongTrinh()">Giải phương trình</button>
+    <div id="result"></div>
+
+    <div class="check-year">
+      <input
+        id="year"
+        type="number"
+        name="year"
+        placeholder="Enter a year"
+        autofocus
+      />
+      <button id="btAddYear" type="submit">Add</button>
     </div>
-    <div class="list-add">
-      <div class="check-year"></div>
+    <div class="check-date">
+      <input
+        id="date"
+        type="text"
+        name="d-m-y"
+        placeholder="Enter date in format DD/MM/YYYY"
+        autofocus
+      />
+      <button id="btAddDate" type="submit">Add</button>
     </div>
+    <div class="list-add"></div>
     <script src="script.js"></script>
   </body>
 </html>

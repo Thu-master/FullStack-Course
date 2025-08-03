@@ -21,6 +21,7 @@
   <body>
     <!-- NAVBAR -->
     <nav class="navbar">
+      <div class="navbar-content">
       <div class="navbar-left">
         <img
           src="https://cdnv2.tgdd.vn/webmwg/2024/tz/images/logo-video.png?v=4"
@@ -46,6 +47,7 @@
         <button type="button"><i class="fas fa-search"></i></button>
         <button type="button"><i class="fas fa-shopping-bag"></i></button>
       </div>
+    </div>
     </nav>
 
     <!-- SECTION HEADER -->
@@ -55,29 +57,25 @@
     </section>
 
     <!-- CAROUSEL -->
-    <section class="carousel">
-      <div class="carousel-content">
-        <div class="carousel-text">
-          <div class="carousel-title">
-            <i class="fab fa-apple"></i>
-            <span>Mac Cho Sinh Viên</span>
-          </div>
-          <h2>
-            Hỗ trợ mạnh mẽ <br />
-            việc học của bạn.
-          </h2>
-          <p>
-            Giảm ngay đến <strong>2 triệu</strong> • Tặng PMH 500.000đ <br />
-            0% Lãi suất. Trả trước từ 20%.
-          </p>
-          <button>Mua ngay</button>
-        </div>
-        <img
-          src="https://storage.googleapis.com/a1aa/image/a9f27706-e30d-4b82-00bb-68cacc53b2e1.jpg"
-          alt="MacBook promo"
-        />
-      </div>
-    </section>
+<section class="simple-carousel">
+  <div class="carousel-wrapper">
+    <div class="carousel-track">
+      <img src="https://cdnv2.tgdd.vn/mwg-static/topzone/Banner/23/29/23292d6f5335a943f5643403eb79e286.png" alt="Slide 1" />
+      <img src="https://cdnv2.tgdd.vn/mwg-static/topzone/Banner/5e/04/5e0471b7f92f1e10cd1f236ca1bb3f38.png" alt="Slide 2" />
+      <img src="https://cdnv2.tgdd.vn/mwg-static/topzone/Banner/5e/04/5e0471b7f92f1e10cd1f236ca1bb3f38.png" alt="Slide 3" />
+    </div>
+
+    <button class="carousel-arrow left"><i class="fas fa-chevron-left"></i></button>
+    <button class="carousel-arrow right"><i class="fas fa-chevron-right"></i></button>
+
+    <div class="carousel-dots">
+      <span class="dot active"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+  </div>
+</section>
+
 
     <!-- FILTER + SORT -->
     <section class="filters">
@@ -92,11 +90,23 @@
         <li>Mac Studio</li>
         <li>Displays</li>
       </ul>
-      <div class="sort">
+      <!-- <div class="sort">
         <span>Xếp theo:</span>
         <strong>Nổi bật</strong>
         <i class="fas fa-chevron-down"></i>
-      </div>
+      </div> -->
+      <div class="sort">
+  <span>Xếp theo:</span>
+  <div class="sort-dropdown">
+    <button class="sort-selected">Nổi bật <i class="fas fa-chevron-down"></i></button>
+    <ul class="sort-menu">
+      <li>Mới nhất</li>
+      <li>Giá thấp đến cao</li>
+      <li>Giá cao đến thấp</li>
+    </ul>
+  </div>
+</div>
+
     </section>
 
     <!-- PRODUCT GRID -->
@@ -200,16 +210,90 @@
         <p>Ghé thăm các website khác cùng tập đoàn MWG</p>
         <div class="brand-logos">
           <img
-            src="https://acb.com.vn/acbwebsite/media/ca9EjXXhcNn6CQwob8iyqWyTg6LnwGftZZgBRVxI.png"
-            src="https://acb.com.vn/acbwebsite/media/ca9EjXXhcNn6CQwob8iyqWyTg6LnwGftZZgBRVxI.png"
-            alt="thegioididong"
-          />
-          <img
             src="https://cms.vietnamreport.net//source/LogoBusiness/202106081228543.thegioididong.png"
-            alt="dienmayXANH"
+            alt="thegioididong" class="thegioididong"
+          />
+          <img            
+            src="https://hienlaptop.com/wp-content/uploads/2024/10/d936cdcc28e1f6d50c8b30eef7255d3d.png"
+            alt="dienmayXANH" class="dienmayXANH"
+          />
+          <img            
+            src="https://acb.com.vn/acbwebsite/media/ca9EjXXhcNn6CQwob8iyqWyTg6LnwGftZZgBRVxI.png"
+            alt="dienmayXANH" class="bachhoaXANH"
+          />
+          <img            
+            src="https://cdnv2.tgdd.vn/webmwg/2024/ak/images/logo-intro.png"
+            alt="dienmayXANH" class="nhathuocankhang"
           />
         </div>
       </div>
     </footer>
+<script>
+  const track = document.querySelector('.carousel-track');
+  const slides = document.querySelectorAll('.carousel-track img');
+  const dots = document.querySelectorAll('.dot');
+  const leftBtn = document.querySelector('.carousel-arrow.left');
+  const rightBtn = document.querySelector('.carousel-arrow.right');
+
+  let currentIndex = 0;
+  let slideCount = slides.length;
+  let autoSlide;
+
+  function updateSlidePosition() {
+    const slideWidth = slides[0].clientWidth;
+    track.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
+
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('active', i === currentIndex);
+    });
+  }
+
+  function nextSlide() {
+    currentIndex = (currentIndex + 1) % slideCount;
+    updateSlidePosition();
+  }
+
+  function prevSlide() {
+    currentIndex = (currentIndex - 1 + slideCount) % slideCount;
+    updateSlidePosition();
+  }
+
+  function startAutoSlide() {
+    autoSlide = setInterval(nextSlide, 5000);
+  }
+
+  function stopAutoSlide() {
+    clearInterval(autoSlide);
+  }
+
+  // Events
+  rightBtn.addEventListener('click', () => {
+    nextSlide();
+    stopAutoSlide();
+    startAutoSlide();
+  });
+
+  leftBtn.addEventListener('click', () => {
+    prevSlide();
+    stopAutoSlide();
+    startAutoSlide();
+  });
+
+  dots.forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+      currentIndex = index;
+      updateSlidePosition();
+      stopAutoSlide();
+      startAutoSlide();
+    });
+  });
+
+  // Init
+  updateSlidePosition();
+  startAutoSlide();
+
+  
+</script>
+
   </body>
 </html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Typing Test Tiếng Việt</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Kiểm tra tốc độ gõ tiếng Việt</h1>
+
+      <!-- Vùng hiển thị các từ -->
+      <div id="word-display" class="word-display">
+        <!-- JS sẽ đổ từ vào đây -->
+      </div>
+
+      <!-- Input để người dùng gõ -->
+      <input
+        type="text"
+        id="input-box"
+        autocomplete="off"
+        placeholder="Bắt đầu gõ từ ở đây..."
+        disabled
+      />
+
+      <!-- Thông tin trạng thái -->
+      <div class="status-bar">
+        <div>⏱ Thời gian: <span id="time">60</span>s</div>
+        <div>✅ Đúng: <span id="correct-count">0</span></div>
+        <div>⌨️ WPM: <span id="wpm">0</span></div>
+      </div>
+
+      <!-- Nút bắt đầu -->
+      <button id="start-button">Bắt đầu</button>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
