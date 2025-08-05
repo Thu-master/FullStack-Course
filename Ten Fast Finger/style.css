@@ -1,85 +1,135 @@
-/* Reset và font cơ bản */
 * {
   box-sizing: border-box;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  margin: 0;
-  padding: 0;
 }
 
 body {
-  background-color: #f3f4f6;
-  color: #111;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #1a0033;
 }
 
 .container {
-  width: 90%;
-  max-width: 800px;
-  background-color: white;
-  padding: 30px;
-  border-radius: 8px;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
-  text-align: center;
-}
-
-h1 {
-  margin-bottom: 20px;
-  color: #1f2937;
-}
-
-/* Vùng hiển thị từ */
-.word-display {
-  border: 1px solid #ccc;
-  padding: 20px;
-  height: 150px;
-  overflow-y: auto;
-  font-size: 20px;
-  line-height: 1.6;
-  margin-bottom: 20px;
-  background-color: #f9fafb;
-  border-radius: 6px;
-  text-align: left;
-}
-
-/* Input gõ từ */
-#input-box {
   width: 100%;
-  padding: 12px;
-  font-size: 18px;
-  margin-bottom: 20px;
-  border: 2px solid #ddd;
-  border-radius: 5px;
-}
-
-#input-box:focus {
-  outline: none;
-  border-color: #60a5fa;
-  background-color: #fff;
-}
-
-/* Thanh trạng thái */
-.status-bar {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 20px;
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+}
+
+.text-box {
+  width: 100%;
+}
+
+.text-space {
+  background: #1e1e2f;
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
   margin-bottom: 20px;
-  font-size: 16px;
 }
 
-/* Nút bắt đầu */
-#start-button {
-  padding: 12px 24px;
+.van-ban {
+  font-size: 18px;
+  line-height: 1.5;
+  text-align: justify;
+  color: #e0d7ff;
+}
+
+.input {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.o-nhap {
+  width: 50%;
+  min-width: 220px;
   font-size: 16px;
-  background-color: #2563eb;
-  color: white;
-  border: none;
-  border-radius: 6px;
+  padding: 6px 10px;
+  border-radius: 5px;
+  border: 1px solid #666;
+  background: #1e1e2f;
+  color: #e0d7ff;
+}
+
+.thoi-gian {
+  font-size: 16px;
+  line-height: 32px;
+  color: #ff3366;
+}
+
+.lam-lai {
+  padding: 6px 12px;
+  font-size: 14px;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  background: #1e1e2f;
+  color: #e0d7ff;
 }
 
-#start-button:hover {
-  background-color: #1d4ed8;
+.ket-qua {
+  width: 100%;
+  text-align: center;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+/* Bàn phím ảo*/
+.keyboard {
+  width: 100%;
+  max-width: 960px;
+  padding: 20px;
+  background-color: #1a1a2e;
+  border-top: 2px solid #3f3f5a;
+  box-shadow: 0 0 20px rgba(255, 0, 255, 0.2);
+  border-radius: 8px;
+}
+
+.keyboard .row {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 10px;
+  padding: 0 12px; /* Thêm padding hai bên */
+  gap: 6px; /* Khoảng cách giữa các phím */
+  flex-wrap: nowrap;
+}
+
+.key {
+  min-width: 42px; /* fix hẹp ô key*/
+  height: 45px;
+  background: linear-gradient(to bottom, #3b0066, #6e00a8);
+  border: 1px solid #00fff7;
+  border-radius: 6px;
+  text-align: center;
+  line-height: 45px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #fff;
+  box-shadow: 0 0 8px #00fff7;
+  transition: 0.15s ease-in-out;
+  user-select: none;
+}
+
+/* Phím đang được nhấn */
+.key.active {
+  background: #00fff7;
+  color: #1a1a2e;
+  box-shadow: 0 0 12px #00fff7;
+}
+
+/* special key*/
+.key[data-size="wide"] {
+  width: 70px;
+}
+.key[data-size="wider"] {
+  width: 100px;
+}
+.key[data-size="space"] {
+  flex: 1;
+  min-width: 200px;
 }

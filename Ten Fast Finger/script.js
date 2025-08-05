@@ -1,135 +1,163 @@
-const wordDisplay = document.getElementById("word-display");
-const inputBox = document.getElementById("input-box");
-const timeSpan = document.getElementById("time");
-const correctCountSpan = document.getElementById("correct-count");
-const wpmSpan = document.getElementById("wpm");
-const startButton = document.getElementById("start-button");
+let vanBan = document.querySelector(".van-ban").textContent.trim();
+let tuArray = vanBan.split(" ");
+let input = document.querySelector(".o-nhap");
+let ketQua = document.querySelector(".ket-qua");
+let lamLai = document.querySelector(".lam-lai");
+let thoiGian = document.querySelector(".thoi-gian");
 
-let words = [
-  "xin",
-  "chào",
-  "bạn",
-  "đang",
-  "gõ",
-  "văn",
-  "bản",
-  "trên",
-  "mạng",
-  "máy",
-  "tính",
-  "nhanh",
-  "luyện",
-  "tập",
-  "bàn",
-  "phím",
-  "tốc",
-  "độ",
-  "chính",
-  "xác",
-  "của",
-  "chúng",
-  "ta",
-  "bắt",
-  "đầu",
-  "ngày",
-  "tháng",
-  "học",
-  "việc",
-  "sinh",
-  "viên",
-  "thầy",
-  "cô",
-  "ngôn",
-  "ngữ",
-  "bài",
-  "thi",
-];
-
-let currentWordIndex = 0;
-let correctCount = 0;
+let index = 0;
+let dung = 0;
+let sai = 0;
 let timeLeft = 60;
-let timer = null;
-let testStarted = false;
+let demNguocDaChay = false;
+let interval;
+let danhGia = [];
 
-// Tạo văn bản từ danh sách
-function generateWords() {
-  let html = "";
-  for (let i = 0; i < 60; i++) {
-    const randomWord = words[Math.floor(Math.random() * words.length)];
-    html += `<span>${randomWord}</span> `;
-  }
-  wordDisplay.innerHTML = html.trim();
+renderVanBan();
+
+function renderVanBan() {
+  let html = tuArray
+    .map((tu, i) => {
+      if (i < index) {
+        return `<span style="color: ${
+          danhGia[i] ? "green" : "red"
+        }">${tu}</span>`;
+      } else if (i === index) {
+        return `<span style="color: blue; text-decoration: underline">${tu}</span>`;
+      } else {
+        return tu;
+      }
+    })
+    .join(" ");
+
+  document.querySelector(".van-ban").innerHTML = html;
 }
 
-// Bắt đầu test
-function startTest() {
-  generateWords();
-  currentWordIndex = 0;
-  correctCount = 0;
-  timeLeft = 60;
-  testStarted = true;
-  correctCountSpan.textContent = 0;
-  wpmSpan.textContent = 0;
-  timeSpan.textContent = timeLeft;
-  inputBox.disabled = false;
-  inputBox.focus();
-
-  highlightCurrentWord();
-
-  if (timer) clearInterval(timer);
-  timer = setInterval(() => {
+function startCountdown() {
+  interval = setInterval(() => {
     timeLeft--;
-    timeSpan.textContent = timeLeft;
+    thoiGian.innerHTML = `<i class="fa-solid fa-clock-rotate-left"></i> ${timeLeft}`;
 
     if (timeLeft <= 0) {
-      clearInterval(timer);
-      endTest();
+      clearInterval(interval);
+      input.disabled = true;
+      ketQua.innerHTML = `<p style="color:#ff3366; font-weight:bold;">Hết giờ!</p>
+                          <p>Đúng: <strong>${dung}</strong></p>
+                          <p>Sai: <strong>${sai}</strong></p>`;
     }
   }, 1000);
 }
 
-// Kết thúc test
-function endTest() {
-  inputBox.disabled = true;
-  testStarted = false;
-  inputBox.value = "";
-}
-
-// Bôi đậm từ hiện tại
-function highlightCurrentWord() {
-  const spans = wordDisplay.querySelectorAll("span");
-  spans.forEach((span) => span.classList.remove("highlight"));
-  if (spans[currentWordIndex]) {
-    spans[currentWordIndex].classList.add("highlight");
+// Ngăn Enter và Space không thêm khoảng trắng thừa
+input.addEventListener("keydown", function (e) {
+  if (!demNguocDaChay) {
+    startCountdown();
+    demNguocDaChay = true;
   }
-}
 
-// Khi người dùng gõ
-inputBox.addEventListener("keydown", function (e) {
-  if (e.key === " " || e.key === "Enter") {
-    e.preventDefault(); // Không tạo dấu cách
-    checkWord();
+  if (e.code === "Enter" || e.code === "Space") {
+    e.preventDefault();
   }
 });
 
-function checkWord() {
-  const spans = wordDisplay.querySelectorAll("span");
-  const typedWord = inputBox.value.trim();
-  const targetWord = spans[currentWordIndex]?.textContent;
+// Xử lý xác nhận từ khi nhấn Space hoặc Enter (keyup)
+input.addEventListener("keyup", function (e) {
+  if (e.code === "Space" || e.code === "Enter") {
+    let tuNhap = input.value.trim();
+    let tuDung = tuArray[index];
 
-  if (typedWord === targetWord) {
-    correctCount++;
-    spans[currentWordIndex].classList.add("correct");
-  } else {
-    spans[currentWordIndex].classList.add("incorrect");
+    if (tuNhap === tuDung) {
+      dung++;
+      danhGia[index] = true;
+    } else {
+      sai++;
+      danhGia[index] = false;
+    }
+
+    index++;
+
+    input.value = "";
+    input.focus();
+
+    renderVanBan();
+
+    if (index >= tuArray.length) {
+      clearInterval(interval);
+      input.disabled = true;
+      ketQua.innerHTML = `<p> Đúng: <strong>${dung}</strong></p>
+                          <p> Sai: <strong>${sai}</strong></p>`;
+    }
   }
+});
 
-  currentWordIndex++;
-  inputBox.value = "";
-  highlightCurrentWord();
-  correctCountSpan.textContent = correctCount;
-  wpmSpan.textContent = Math.round((correctCount / (60 - timeLeft)) * 60) || 0;
-}
+lamLai.addEventListener("click", () => {
+  location.reload();
+});
 
-// Khi nhấn nút "Bắt đầu"
-startButton.addEventListener("click", startTest);
+// Hiệu ứng bàn phím ảo (không thay đổi)
+document.addEventListener("keydown", function (e) {
+  const key = e.key.toUpperCase();
+  const allKeys = document.querySelectorAll(".key");
+
+  allKeys.forEach((el) => {
+    if (el.textContent === key) {
+      el.classList.add("active");
+    }
+
+    const specialChar = el.textContent;
+    if (
+      (specialChar === "," && e.key === ",") ||
+      (specialChar === "." && e.key === ".") ||
+      (specialChar === "!" && e.key === "!") ||
+      (specialChar === "?" && e.key === "?") ||
+      (specialChar === "@" && e.key === "@") ||
+      (specialChar === "#" && e.key === "#") ||
+      (specialChar === "$" && e.key === "$") ||
+      (specialChar === "%" && e.key === "%") ||
+      (specialChar === "&" && e.key === "&") ||
+      (specialChar === "*" && e.key === "*")
+    ) {
+      el.classList.add("active");
+    }
+  });
+});
+
+document.addEventListener("keyup", function (e) {
+  const key = e.key.toUpperCase();
+  const allKeys = document.querySelectorAll(".key");
+
+  allKeys.forEach((el) => {
+    if (el.textContent === key) {
+      el.classList.remove("active");
+    }
+
+    const mapKeyLabel = {
+      " ": "Space",
+      Enter: "Enter",
+      Shift: "Shift",
+      Backspace: "Back",
+      Tab: "Tab",
+      Control: "Ctrl",
+      Alt: "Alt",
+      CapsLock: "Caps",
+    };
+
+    const pressedKey = mapKeyLabel[e.key] || e.key.toUpperCase();
+
+    const specialChar = el.textContent;
+    if (
+      (specialChar === "," && e.key === ",") ||
+      (specialChar === "." && e.key === ".") ||
+      (specialChar === "!" && e.key === "!") ||
+      (specialChar === "?" && e.key === "?") ||
+      (specialChar === "@" && e.key === "@") ||
+      (specialChar === "#" && e.key === "#") ||
+      (specialChar === "$" && e.key === "$") ||
+      (specialChar === "%" && e.key === "%") ||
+      (specialChar === "&" && e.key === "&") ||
+      (specialChar === "*" && e.key === "*")
+    ) {
+      el.classList.remove("active");
+    }
+  });
+});
